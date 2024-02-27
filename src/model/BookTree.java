@@ -5,9 +5,9 @@ package model;
  *
  * @author nhs
  */
-public class BookList extends BinarySearchTree <Book> {
+public class BookTree extends BinarySearchTree <Book> {
 
-    public BookList() {
+    public BookTree() {
         super();
     }
 

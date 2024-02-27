@@ -77,21 +77,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
     
 
-    public void deleteByMerging(T key) {
-        root = deleteByMerging(root, key);
+    public void deleteByCopying(T key) {
+        root = BinarySearchTree.this.deleteByCopying(root, key);
     }
 
-    private Node<T> deleteByMerging(Node<T> p, T key) {
+    private Node<T> deleteByCopying(Node<T> p, T key) {
         if (p == null) {
             return null;
         }
 
         if (key.compareTo(p.getData()) < 0) {
-            p.setLeft(deleteByMerging(p.getLeft(), key)) ;
+            p.setLeft(BinarySearchTree.this.deleteByCopying(p.getLeft(), key)) ;
         }
         
         else if (key.compareTo(p.getData()) > 0) {
-            p.setRight(deleteByMerging(p.getRight(), key)) ;
+            p.setRight(BinarySearchTree.this.deleteByCopying(p.getRight(), key)) ;
         }
         
         else {
@@ -106,7 +106,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             Node<T> right = p.getRight();
             Node<T> min = findMin(p.getRight());
             p = new Node<T>(min.getData(),null,null);
-            p.setRight(deleteByMerging(right, min.getData()));
+            p.setRight(BinarySearchTree.this.deleteByCopying(right, min.getData()));
             p.setLeft(left);
         }
 

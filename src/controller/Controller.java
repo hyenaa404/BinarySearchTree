@@ -5,7 +5,7 @@
 package controller;
 
 import model.Book;
-import model.BookList;
+import model.BookTree;
 import model.Node;
 import util.InputUtils;
 
@@ -16,7 +16,7 @@ import util.InputUtils;
 public class Controller {
     public static void main(String[] args) {
         int choice;
-        BookList bl = new BookList();
+        BookTree bl = new BookTree();
         while (true) {
             choice = Menu.chooseInputOption();
             switch (choice) {
@@ -38,7 +38,7 @@ public class Controller {
         }
     }
     
-    public static void addBook(BookList bl){
+    public static void addBook(BookTree bl){
         System.out.print("Enter SIBN code: ");
         int sibn = InputUtils.inputInt();
         System.out.print("Enter book's name: ");
@@ -49,7 +49,7 @@ public class Controller {
         bl.insert(book);
     }
     
-    public static void searchBook (BookList bl){
+    public static void searchBook (BookTree bl){
         System.out.print("Enter SIBN to search: ");
         int sibn = InputUtils.inputInt();
         Node<Book> root = bl.getRoot();
@@ -58,18 +58,18 @@ public class Controller {
         result.toString();
     }
     
-    public static void viewAllBook (BookList bl){
+    public static void viewAllBook (BookTree bl){
         bl.inOrderTraversal(bl.getRoot());
     }
     
-    public static void deleteBook(BookList bl){
+    public static void deleteBook(BookTree bl){
         System.out.println("Enter SIBN to delete: ");
         int sibn = InputUtils.inputInt();
         Node<Book> root = bl.getRoot();
         Book b = new Book(sibn,null,null);
         Node<Book> result = bl.search(root, b);
         if(result != null){
-            bl.deleteByMerging(result.getData());
+            bl.deleteByCopying(result.getData());
             System.out.println("Successfully!");
         }else{
             System.out.println("Not found.");
